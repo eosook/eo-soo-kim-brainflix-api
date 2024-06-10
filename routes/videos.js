@@ -21,6 +21,10 @@ videoRouter
         const videoIdParam = req.params.videoId;
         const videosData = readVideos();
         const foundVideo = videosData.find((video) => video.id === videoIdParam);
+
+        if(!foundVideo){
+            return res.status(404).send('Could not find your video');
+        }
     })
 
 export default videoRouter;
