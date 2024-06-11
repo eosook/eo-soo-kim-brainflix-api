@@ -16,14 +16,15 @@ videoRouter
     })
 
 videoRouter
-    .route('./:videoId')
+    .route('/:videoId')
     .get((req, res) =>{
-        const videoIdParam = req.params.videoId;
-        const videosData = readVideos();
-        const foundVideo = videosData.find((video) => video.id === videoIdParam);
-
-        if(!foundVideo){
-            return res.status(404).send('Could not find your video');
+        try{
+            const videoIdParam = req.params.videoId;
+            const videosData = readVideos();
+            const foundVideo = videosData.find((video) => video.id === videoIdParam);
+            res.json(foundVideo);
+        } catch {   
+            res.status(404).send('Could not find your video');
         }
     })
 
