@@ -11,8 +11,12 @@ const readVideos = () => {
 videoRouter
     .route('/')
     .get((_req, res) => {
-        const videosData = readVideos();
-        res.json(videosData);
+        try {
+            const videosData = readVideos();
+            res.json(videosData);
+        } catch (error){
+            res.send(error)
+        }
     })
 
 videoRouter
