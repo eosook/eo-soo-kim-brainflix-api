@@ -23,6 +23,17 @@ app.get('/', (_req, res) => {
     }
 })
 
+app.post('/upload', (req, res) => {
+    try{
+        const videoData = JSON.parse(fs.readFileSync('./data/videos.json'));
+        videoData.push(req.body);
+        fs.writeFileSync('./data/videos.json', JSON.stringify(videoData));
+        res.send("You uploaded a new video!");
+    } catch {
+        res.send("Could not upload your video");
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`App listening on ${PORT}`);
 });
